@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>Modal</title>
+</head>
+<body>
+    <div class="container" style="margin-top: 40px;">
+        <div id="root">
+            <modal v-show="showModal" @closeaa="showModal = false">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, mollitia? Debitis, similique possimus consectetur aliquid repellendus cupiditate blanditiis eveniet suscipit quibusdam. Quis iure, perferendis minima molestias eveniet accusantium quo mollitia.</p>
+            </modal>
+            <button @click="showModal = true">Show modal</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        Vue.component('modal', {
+            template: `
+            <div class="modal is-active">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="box">
+                        <slot></slot>
+                    </div>
+                </div>
+                <button class="modal-close is-large" aria-label="close" @click="$emit('closeaa')"></button>
+            </div>
+            `
+        })
+
+        new Vue({
+            el: '#root',
+            data: {
+                showModal: false
+            }
+        })
+       
+    </script>
+</body>
+</html>

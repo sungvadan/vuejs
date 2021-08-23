@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .isLoading {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- <input type="text" id="input" v-model="message"> -->
+        <p>The value of the input is: {{ message }}</p>
+        <ul>
+            <li v-for="name in names" v-text="name"></li>
+        </ul>
+        <input type="text" v-model="newName">
+        <button :title="title" @click="addName">Add</button>
+
+        <button :class="{'isLoading': isLoading}" @click="toogleLoading">Toogle</button>
+        <button :disabled="isLoading" @click="toogleLoading">disabled</button>
+
+        <h1>
+            {{ revesedMessage }}
+        </h1>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        
+        var app = new Vue({
+            el: '#root',
+            data: {
+                newName: '',
+                message: 'Hello world',
+                names: ['Jon', 'Mary', 'Van'],
+                title: "This is the title of the button set via js",
+                isLoading: false
+            },
+            methods: {
+                addName() {
+                   this.names.push(this.newName)
+                   this.newName = ''
+                },
+                toogleLoading() {
+                    this.isLoading = !this.isLoading
+                }
+            },
+            computed: {
+                revesedMessage() {
+                    return this.message.split('').reverse().join('')
+                }
+            }
+            // mounted() {
+            //     document.querySelector('#button').addEventListener('click', ()  => {
+            //         let name = document.querySelector('#name')
+            //         app.names.push(name.value)
+            //         name.value = ''
+                    
+            //     })
+            // }
+        })
+    </script>
+</body>
+</html>

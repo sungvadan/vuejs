@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>Modal</title>
+</head>
+<body>
+    <div class="container" style="margin-top: 40px;">
+        <div id="root">
+            <coupon></coupon>
+            <h2 v-if="couponApplied">Coupon is applied</h2>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        window.Event = new Vue()
+
+        Vue.component('coupon', {
+            template: `
+                <input placeholder="enter your coupon" v-model="coupon" @blur="applyCoupon">
+            `,
+            data() {
+                return {
+                    coupon: ''
+                }
+            },
+            methods: {
+                applyCoupon() {
+                    window.Event.$emit('applied', this.coupon)
+                }
+            }
+        })
+
+        new Vue({
+            el: "#root",
+            data: {
+                couponApplied: false
+            },
+            created() {
+                window.Event.$on('applied', (coupon) => alert(coupon))
+            }
+        })
+       
+    </script>
+</body>
+</html>
