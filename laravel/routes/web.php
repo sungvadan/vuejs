@@ -35,3 +35,4 @@ Route::view('/stream', 'stream.index');
 Route::view('/scope-slot', 'scope-slot');
 Route::view('/carousel', 'carousel');
 Route::view('/tooltip', 'tooltip');
+Route::view('/render', 'render');
